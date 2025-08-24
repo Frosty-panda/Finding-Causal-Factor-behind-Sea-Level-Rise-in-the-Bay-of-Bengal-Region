@@ -2,6 +2,7 @@
 1.Conducted sea level analysis and projection for 21.25°N, 87.75°E using time series modeling. 2. Detected heteroscedasticity and autocorrelation using Breusch-Pagan, White’s, and Durbin-Watson tests. 4.Identified top causal factors and their optimal lag for sea level rise using Pearl (DoWhy) and Granger causality methods.
 
 
+
 ## Sea Level Rise Analysis and Causal Inference (1993–2035)
 ### Location: 21.25°N, 87.75°E (Bay of Bengal, 153 south of Kolkata)
 
