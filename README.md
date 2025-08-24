@@ -3,7 +3,7 @@
 
 
 ## Sea Level Rise Analysis and Causal Inference (1993–2035)
-### Location: 21.25°N, 87.75°E
+### Location: 21.25°N, 87.75°E (Bay of Bengal, 153 south of Kolkata)
 
 ## Overview
 This project investigates the drivers behind sea level rise at a specific coastal location in India, using a combination of statistical analysis, time series modeling, machine learning, and causal inference. The goal was to not only forecast sea level changes from 1993 to 2035 but also to identify the most influential and causal factors contributing to this rise.
@@ -14,7 +14,7 @@ Rising sea levels pose significant risks to coastal communities, infrastructure,
 ## Data Preparation
 
 ### Data Sources:
-Multi-decadal, multi-variable datasets including climate indicators (e.g., temperature, river discharge, greenhouse gas emissions) and economic variables.
+Multi-decadal, multi-variable datasets from EUROSAT satelitte data including climate indicators (e.g., temperature, river discharge, greenhouse gas emissions) and economic variables.
 ### Cleaning:
 Removed irrelevant columns (e.g., 'year'), handled missing values, and ensured data consistency.
 ### Scaling:
@@ -65,19 +65,38 @@ Identified the variable and lag with the lowest significant p-value as the stron
 
 ## Results
 Heteroscedasticity was detected in linear models, but XGBoost and SARIMAX handled it robustly.
-Top features by XGBoost importance: River Discharge in last 24 hrs, sea surface temperature.
+Took care of auto correlation and used XGBoost as the data had high heteroscedasticity present in it.
+
+Top features by XGBoost importance: River Discharge in last 24 hrs, sea surface temperature. 
+It is intuitive as the target location is 48kms from the Ganga basin. Thus, River dischare would be affecting the sea level.
 
 Most causal factor (DoWhy):
 Sea surface temperature with the highest positive ATE.
+The other factor was agricultural_mehtane_emissions. However, agricultural_methane_emissions had a correlation of >0.95 with the following features:
+1. 'agriculture_fishing_forestry_value_added',
+2. 'energy_use_kg_per_capita',
+3. 'fertilizer_consumption',
+4. 'manufacturing_value_added',
+5. 'nitrous_oxide_emissions',
+6. 'population_total_yearly',
+7. 'total_greenhouse_gas_emissions'
+
+Thus, the above variables were coming out to be the likely cause behind the sea level rise as well.
+
 
 
 Strongest Granger-causal factor:
-(Insert factor, e.g., 'agricultural_mehtane_emissions') with optimal lag of (X) months/years.
+Sea sufae temperature with optimal lag of 1 month.
+Other notable factors are:
+1. River discharge with a lag of 8 months.
+2. total greenhouse gas emissions with a lag of 105 months.
+
 Model performance:
-Achieved R² of (insert value) and MSE of (insert value) on test data.
+Achieved R² of 84.6 and MSE of 0.0004 on test data.
 
 ## Projection:
 Provided sea level projections for 21.25°N, 87.75°E from 1993 to 2035.
+
 Why This Approach?
 Combining statistical tests, time series models, machine learning, and causal inference provides a holistic understanding of both prediction and causation.
 Feature selection and scaling ensure robust, interpretable models.
@@ -86,6 +105,7 @@ Causal inference (DoWhy, Granger) moves beyond correlation, identifying actionab
 ### Acknowledgements
 Open-source libraries: scikit-learn, statsmodels, xgboost, dowhy, matplotlib, seaborn, pandas, numpy.
 World Bank and other climate data providers.
+
 Contact
 For questions or collaboration, please reach out via LinkedIn or GitHub Issues.
 
