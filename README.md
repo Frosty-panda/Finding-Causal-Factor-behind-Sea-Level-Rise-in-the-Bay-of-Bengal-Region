@@ -38,7 +38,8 @@ Modeled sea level as a function of its own past values and exogenous variables.
 Used ACF and PACF plots to select optimal lag parameters.
 SARIMAX allowed for inclusion of external drivers (e.g., emissions, temperature).
 Validated model assumptions and residuals.
-Machine Learning Modeling
+
+## Machine Learning Modeling
 ### XGBoost Regression:
 Chosen for its robustness to heteroscedasticity and ability to capture non-linear relationships.
 Hyperparameter tuning via RandomizedSearchCV and GridSearchCV (parameters: learning_rate, max_depth, n_estimators, min_child_weight, gamma, colsample_bytree).
@@ -64,10 +65,12 @@ Identified the variable and lag with the lowest significant p-value as the stron
 
 ## Results
 Heteroscedasticity was detected in linear models, but XGBoost and SARIMAX handled it robustly.
-Top features by XGBoost importance:
-(Insert your top features, e.g., 'sea_surface_temperature', 'river_discharge', etc.)
+Top features by XGBoost importance: River Discharge in last 24 hrs, sea surface temperature.
+
 Most causal factor (DoWhy):
-(Insert most causal factor, e.g., 'sea_surface_temperature') with the highest positive ATE.
+Sea surface temperature with the highest positive ATE.
+
+
 Strongest Granger-causal factor:
 (Insert factor, e.g., 'agricultural_mehtane_emissions') with optimal lag of (X) months/years.
 Model performance:
